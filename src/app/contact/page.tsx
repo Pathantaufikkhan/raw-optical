@@ -11,19 +11,20 @@ function MusicSchoolContactUs() {
   const [isEmailValid, setIsEmailValid] = useState(true);
 
   const validateEmail = (email: string) => {
-    // Simple email RegEx pattern
     const pattern = /^[^\s@]+@[^\s@]+\.(com|in|org|net|edu)$/i;
     return pattern.test(email);
   };
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
+    const value = e.target.value.trim();
     setEmail(value);
     setIsEmailValid(validateEmail(value));
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    toast.dismiss();
+
     if (!isEmailValid) {
       toast.error('Please enter a valid email address.');
       return;
@@ -49,7 +50,7 @@ function MusicSchoolContactUs() {
         toast.error('Failed to send message.');
       }
     } catch (error) {
-      toast.error('An error occurred.');
+      toast.error('An error occurred while sending your message.');
     } finally {
       setLoading(false);
     }
@@ -65,7 +66,7 @@ function MusicSchoolContactUs() {
           Contact Us
         </h1>
         <p className="text-neutral-400 max-w-lg mx-auto my-2 text-sm text-center">
-          We&apos;re here to help with any questions about our frmaes, element, or others. Reach out and let us know how we can assist you in your dulicate eye journey.
+          We're here to help with any questions about our frames, lenses, or anything else. Reach out and let us assist you on your clear vision journey.
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4 mt-4">
@@ -82,7 +83,9 @@ function MusicSchoolContactUs() {
             required
           />
           {!isEmailValid && (
-            <p className="text-red-500 text-sm -mt-3">Please enter a valid email address.</p>
+            <p className="text-red-500 text-sm -mt-3">
+              Please enter a valid email address.
+            </p>
           )}
 
           <textarea
@@ -96,9 +99,9 @@ function MusicSchoolContactUs() {
 
           <button
             type="submit"
-            disabled={loading || !isEmailValid}
+            disabled={loading || !isEmailValid || !message.trim()}
             className={`flex items-center justify-center gap-2 px-6 py-2 rounded-lg font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 ${
-              loading || !isEmailValid
+              loading || !isEmailValid || !message.trim()
                 ? 'bg-gray-500 text-white cursor-not-allowed'
                 : 'bg-teal-500 text-white hover:bg-teal-600 focus:ring-teal-500'
             }`}

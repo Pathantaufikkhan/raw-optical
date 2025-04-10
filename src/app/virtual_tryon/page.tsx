@@ -34,7 +34,8 @@ export default function VirtualTryOnPage() {
       } else {
         toast.error(data.error || 'Something went wrong.');
       }
-    } catch (error) {
+    } 
+    catch (error) {
       toast.error('Failed to submit. Please try again later.');
     } finally {
       setLoading(false);
@@ -94,7 +95,8 @@ export default function VirtualTryOnPage() {
         </form>
       ) : (
         <p className="text-green-400 text-sm mt-6">
-          ✅ Thank you! We'll notify you when it's live. 🕶️
+          ✅ <p>We'll notify you when it's live.</p>
+          🕶️
         </p>
       )}
     </div>

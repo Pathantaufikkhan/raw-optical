@@ -53,14 +53,14 @@ export async function POST(req: Request) {
         });
 
 
-// also recevie notify emails
+        // also recevie notify emails
 
-const notify = {
-    from: `"Qwality Optical Contact Form" <${process.env.GMAIL_USER}>`,
-    to: process.env.GMAIL_USER,
-    replyTo: email,
-    subject: `📬 New notify message ${email}`,
-    html: `
+        const notify = {
+            from: `"Qwality Optical Contact Form" <${process.env.GMAIL_USER}>`,
+            to: process.env.GMAIL_USER,
+            replyTo: email,
+            subject: `📬 New notify message ${email}`,
+            html: `
       <div style="font-family: Arial, sans-serif; padding: 16px;">
         <h2 style="color: #007bff;">New Contact Request from Qwality Optical</h2>
         <p><strong>Email:</strong> ${email}</p>
@@ -70,8 +70,9 @@ const notify = {
         <p style="font-size: 12px; color: gray;">This message was submitted via your Qwality Optical website contact form.</p>
       </div>
     `,
-  };
-  
+        };
+
+        await transporter.sendMail(notify);
 
         return NextResponse.json({ success: true }, { status: 200 });
     } catch (error) {

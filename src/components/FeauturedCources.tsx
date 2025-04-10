@@ -2,6 +2,7 @@
 import Link from "next/link";
 import courseData from "../data/music_cources.json";
 import { BackgroundGradient } from "./ui/background-gradient";
+import Image from "next/image";
 // import { Button } from "./ui/moving-border";
 
 interface Product {
@@ -38,7 +39,7 @@ function FeaturedCourses() {
             <div key={course.id} className="flex justify-center text-white">
               <BackgroundGradient className="flex flex-col rounded-[22px] bg-black dark:bg-zinc-900 overflow-hidden h-full max-w-sm text-white">
                 <div className="p-4 sm:p-6 flex flex-col items-center text-center flex-grow">
-                  <img
+                  <Image
                     src={course.image}
                     alt={course.name}
                     className="w-full h-48 object-cover rounded-md mb-4"
@@ -47,7 +48,7 @@ function FeaturedCourses() {
                     {course.name}
                   </p>
 
-                  <p className="text-sm text-neutral-400 dark:text-neutral-400 flex-grow text-white">
+                  <p className="text-sm text-neutral-400 dark:text-neutral-400 flex-grow">
                     {course.description}
                   </p>
                   <Link href={`/courses/${course.slug}`}>see the frame</Link>
