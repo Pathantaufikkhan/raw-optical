@@ -1,0 +1,104 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Classic Aviator Sunglasses",
+      "slug": "classic-aviator-sunglasses",
+      "description": "Stylish and timeless aviator sunglasses with UV protection.",
+      "price": 99.99,
+      "brand": "RayVision",
+      "isFeatured": true,
+      "image": "/products/aviator.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Blue Light Blocking Glasses",
+      "slug": "blue-light-blocking-glasses",
+      "description": "Protect your eyes from screen fatigue with these stylish blue light blockers.",
+      "price": 109.99,
+      "brand": "OptiShield",
+      "isFeatured": false,
+      "image": "/products/blue-light.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Premium Reading Glasses",
+      "slug": "premium-reading-glasses",
+      "description": "Comfortable and sleek reading glasses for everyday use.",
+      "price": 119.99,
+      "brand": "ClearRead",
+      "isFeatured": true,
+      "image": "/products/reading.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Kids' Flexible Glasses",
+      "slug": "kids-flexible-glasses",
+      "description": "Durable and flexible frames designed especially for kids.",
+      "price": 129.99,
+      "brand": "KidOptix",
+      "isFeatured": false,
+      "image": "/products/kids.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Photochromic Lenses",
+      "slug": "photochromic-lenses",
+      "description": "Lenses that adapt to lighting conditions for maximum comfort.",
+      "price": 139.99,
+      "brand": "LightAdapt",
+      "isFeatured": false,
+      "image": "/products/photochromic.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Luxury Rimless Frames",
+      "slug": "luxury-rimless-frames",
+      "description": "Lightweight, elegant rimless frames for a sophisticated look.",
+      "price": 149.99,
+      "brand": "EliteOptics",
+      "isFeatured": true,
+      "image": "/products/rimless.jpg"
+    },
+    {
+      "id": 7,
+      "name": "Polarized Sport Sunglasses",
+      "slug": "polarized-sport-sunglasses",
+      "description": "Designed for athletes, these polarized lenses reduce glare and increase visibility.",
+      "price": 159.99,
+      "brand": "ActiveEyes",
+      "isFeatured": false,
+      "image": "/products/sport.jpg"
+    },
+    {
+      "id": 8,
+      "name": "Designer Cat-Eye Frames",
+      "slug": "designer-cat-eye-frames",
+      "description": "Make a statement with these trendy cat-eye frames.",
+      "price": 169.99,
+      "brand": "VogueVision",
+      "isFeatured": true,
+      "image": "/products/cateye.jpg"
+    },
+    {
+      "id": 9,
+      "name": "Vintage Round Glasses",
+      "slug": "vintage-round-glasses",
+      "description": "Retro-inspired round frames for a classic, intellectual look.",
+      "price": 179.99,
+      "brand": "RetroSpecs",
+      "isFeatured": false,
+      "image": "/products/round.jpg"
+    },
+    {
+      "id": 10,
+      "name": "Smart Glasses with Bluetooth",
+      "slug": "smart-glasses-bluetooth",
+      "description": "Stay connected with glasses that feature built-in Bluetooth audio.",
+      "price": 189.99,
+      "brand": "TechLens",
+      "isFeatured": true,
+      "image": "/products/smart.jpg"
+    }
+  ]
+}
