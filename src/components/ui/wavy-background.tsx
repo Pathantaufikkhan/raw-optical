@@ -42,13 +42,16 @@ export const WavyBackground: React.FC<WavyBackgroundProps> = ({
 
   const [isSafari, setIsSafari] = useState(false);
 
-  const waveColors = colors ?? [
-    "#38bdf8",
-    "#818cf8",
-    "#c084fc",
-    "#e879f9",
-    "#22d3ee",
-  ];
+  const waveColors = useMemo(() => {
+    return colors ?? [
+      "#38bdf8",
+      "#818cf8",
+      "#c084fc",
+      "#e879f9",
+      "#22d3ee",
+    ];
+  }, [colors]);
+  
 
   const noise = useMemo(() => createNoise3D(), []);
 

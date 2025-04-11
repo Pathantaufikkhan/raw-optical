@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import React, { FormEvent, useState } from 'react';
-import { BackgroundBeams } from '@/components/ui/background-beams';
-import { Toaster, toast } from 'react-hot-toast';
+import React, { FormEvent, useState } from "react";
+import { BackgroundBeams } from "@/components/ui/background-beams";
+import { Toaster, toast } from "react-hot-toast";
 
 function MusicSchoolContactUs() {
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [isEmailValid, setIsEmailValid] = useState(true);
 
@@ -26,31 +26,31 @@ function MusicSchoolContactUs() {
     toast.dismiss();
 
     if (!isEmailValid) {
-      toast.error('Please enter a valid email address.');
+      toast.error("Please enter a valid email address.");
       return;
     }
 
     setLoading(true);
 
     try {
-      const res = await fetch('/api/send', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const res = await fetch("/api/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, message }),
       });
 
       const data = await res.json();
 
       if (data.success) {
-        toast.success('Message sent successfully!');
-        setEmail('');
-        setMessage('');
+        toast.success("Message sent successfully!");
+        setEmail("");
+        setMessage("");
         setIsEmailValid(true);
       } else {
-        toast.error('Failed to send message.');
+        toast.error("Failed to send message.");
       }
-    } catch (error) {
-      toast.error('An error occurred while sending your message.');
+    } catch {
+      toast.error("An error occurred while sending your message.");
     } finally {
       setLoading(false);
     }
@@ -66,7 +66,9 @@ function MusicSchoolContactUs() {
           Contact Us
         </h1>
         <p className="text-neutral-400 max-w-lg mx-auto my-2 text-sm text-center">
-          We're here to help with any questions about our frames, lenses, or anything else. Reach out and let us assist you on your clear vision journey.
+          We&rsquo;re here to help with any questions about our frames, lenses,
+          or anything else. Reach out and let us assist you on your clear vision
+          journey.
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4 mt-4">
@@ -77,8 +79,8 @@ function MusicSchoolContactUs() {
             placeholder="Your email address"
             className={`rounded-lg border w-full p-4 bg-neutral-950 text-white placeholder:text-neutral-400 ${
               isEmailValid
-                ? 'border-neutral-800 focus:ring-teal-500'
-                : 'border-red-500 focus:ring-red-500'
+                ? "border-neutral-800 focus:ring-teal-500"
+                : "border-red-500 focus:ring-red-500"
             } focus:ring-2`}
             required
           />
@@ -102,14 +104,14 @@ function MusicSchoolContactUs() {
             disabled={loading || !isEmailValid || !message.trim()}
             className={`flex items-center justify-center gap-2 px-6 py-2 rounded-lg font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 ${
               loading || !isEmailValid || !message.trim()
-                ? 'bg-gray-500 text-white cursor-not-allowed'
-                : 'bg-teal-500 text-white hover:bg-teal-600 focus:ring-teal-500'
+                ? "bg-gray-500 text-white cursor-not-allowed"
+                : "bg-teal-500 text-white hover:bg-teal-600 focus:ring-teal-500"
             }`}
           >
             {loading && (
               <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
             )}
-            {loading ? 'Sending...' : 'Send Message'}
+            {loading ? "Sending..." : "Send Message"}
           </button>
         </form>
       </div>
