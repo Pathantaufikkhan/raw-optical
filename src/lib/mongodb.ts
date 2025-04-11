@@ -8,6 +8,7 @@ if (!process.env.MONGODB_URI) {
   throw new Error('Add your Mongo URI to .env.local');
 }
 
+
 const client = new MongoClient(uri, options);      // changed from let ➝ const
 const clientPromise = client.connect();            // changed from let ➝ const
 
