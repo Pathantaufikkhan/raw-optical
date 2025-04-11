@@ -40,6 +40,8 @@ function FeaturedCourses() {
               <BackgroundGradient className="flex flex-col rounded-[22px] bg-black dark:bg-zinc-900 overflow-hidden h-full max-w-sm text-white">
                 <div className="p-4 sm:p-6 flex flex-col items-center text-center flex-grow">
                   <Image
+                    width={500}   // 👈 specify width
+                    height={300}  // 👈 and height
                     src={course.image}
                     alt={course.name}
                     className="w-full h-48 object-cover rounded-md mb-4"
