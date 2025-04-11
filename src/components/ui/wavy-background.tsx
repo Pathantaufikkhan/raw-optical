@@ -8,6 +8,7 @@ import React, {
   useCallback,
   ReactNode,
   HTMLAttributes,
+  useMemo,
 } from "react";
 import { createNoise3D } from "simplex-noise";
 
@@ -28,17 +29,19 @@ export const WavyBackground: React.FC<WavyBackgroundProps> = ({
   className,
   containerClassName,
   colors,
-  waveWidth,
-  backgroundFill,
+  waveWidth = 50,
+  backgroundFill = "black",
   blur = 10,
   speed = "fast",
   waveOpacity = 0.5,
   ...props
 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const noise = createNoise3D();
+  const animationIdRef = useRef<number>(0);
+  const ntRef = useRef<number>(0);
 
   const [isSafari, setIsSafari] = useState(false);
+
   const waveColors = colors ?? [
     "#38bdf8",
     "#818cf8",
@@ -47,7 +50,9 @@ export const WavyBackground: React.FC<WavyBackgroundProps> = ({
     "#22d3ee",
   ];
 
-  const getSpeed = () => {
+  const noise = useMemo(() => createNoise3D(), []);
+
+  const getSpeed = useCallback(() => {
     switch (speed) {
       case "slow":
         return 0.001;
@@ -56,67 +61,75 @@ export const WavyBackground: React.FC<WavyBackgroundProps> = ({
       default:
         return 0.001;
     }
-  };
+  }, [speed]);
 
-  const animationIdRef = useRef<number>(0);
-  const ntRef = useRef<number>(0);
+  const drawWave = useCallback(
+    (ctx: CanvasRenderingContext2D, w: number, h: number, n: number) => {
+      for (let i = 0; i < n; i++) {
+        ctx.beginPath();
+        ctx.lineWidth = waveWidth;
+        ctx.strokeStyle = waveColors[i % waveColors.length];
+
+        for (let x = 0; x < w; x += 5) {
+          const y = noise(x / 800, 0.3 * i, ntRef.current) * 100;
+          ctx.lineTo(x, y + h * 0.5);
+        }
+
+        ctx.stroke();
+        ctx.closePath();
+      }
+    },
+    [waveColors, waveWidth, noise]
+  );
 
   const render = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     const w = canvas.width;
     const h = canvas.height;
 
-    ctx.fillStyle = backgroundFill || "black";
+    ctx.fillStyle = backgroundFill;
     ctx.globalAlpha = waveOpacity;
     ctx.fillRect(0, 0, w, h);
 
     ntRef.current += getSpeed();
+    drawWave(ctx, w, h, 5);
 
-    const drawWave = (n: number) => {
-      for (let i = 0; i < n; i++) {
-        ctx.beginPath();
-        ctx.lineWidth = waveWidth || 50;
-        ctx.strokeStyle = waveColors[i % waveColors.length];
-        for (let x = 0; x < w; x += 5) {
-          const y = noise(x / 800, 0.3 * i, ntRef.current) * 100;
-          ctx.lineTo(x, y + h * 0.5);
-        }
-        ctx.stroke();
-        ctx.closePath();
-      }
-    };
-
-    drawWave(5);
     animationIdRef.current = requestAnimationFrame(render);
-  }, [backgroundFill, waveColors, waveWidth, waveOpacity, speed]);
+  }, [backgroundFill, waveOpacity, getSpeed, drawWave]);
 
   const init = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    ctx.filter = `blur(${blur}px)`;
-
-    window.onresize = () => {
+    const setCanvasSize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       ctx.filter = `blur(${blur}px)`;
     };
 
+    setCanvasSize();
+    window.addEventListener("resize", setCanvasSize);
+
     render();
+
+    return () => {
+      window.removeEventListener("resize", setCanvasSize);
+    };
   }, [blur, render]);
 
   useEffect(() => {
-    init();
+    const cleanupResize = init();
     return () => {
       cancelAnimationFrame(animationIdRef.current);
+      cleanupResize?.();
     };
   }, [init]);
 
