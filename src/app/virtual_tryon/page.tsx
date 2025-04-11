@@ -28,7 +28,7 @@ export default function VirtualTryOnPage() {
       const data = await res.json();
 
       if (data.success) {
-        toast.success("You&apos;re on the list! 🎉");
+        toast.success("You're on the list! 🎉");
 
         setSubmitted(true);
         setEmail('');
