@@ -22,7 +22,8 @@ export default function VirtualTryOnPage() {
       const res = await fetch('/api/send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, message: 'Notify me about Virtual Try-On' }),
+        body: JSON.stringify({ email, message: 'Notify me about Virtual Try-On',formType:"notify" }),
+        
       });
 
       const data = await res.json();

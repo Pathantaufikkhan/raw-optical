@@ -10,8 +10,9 @@ import WhyChooseUs from "@/components/WhyChooseUs";
 
 export default function Home() {
   return (
-<main className="min-h-sbg-grid-white antialiased/[0.9] bg-black text-white">
-<div>
+<main className="min-h-screen antialiased bg-black text-white">
+
+<div className="px-4 md:px-12"> 
 
   <HeroSection/>
   <FeauturedCources/>
